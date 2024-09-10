@@ -3,6 +3,7 @@ app:
 
 deployment:
   name: mavenwebappdeployment
+  namespace: mvnapp
   replicas: 1
   strategy: Recreate
 
