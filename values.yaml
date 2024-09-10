@@ -16,6 +16,7 @@ container:
   port: 80
   
 service:
+  name: mavnwebappsvc
   type: ClusterIP
   port: 80
   targetPort: 8080
