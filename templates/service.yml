@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: mavenwebappsvc
+  name: {{ values.service.name }}
 spec:
   selector:
-    app: mavenwebapp
-  type: NodePort
+    app: {{ values.app.name }}
+  type: {{ values.service.type }}
   ports:
-  - port: 80
-    targetPort: 8080
+  - port: {{ values.service.port }}
+    targetPort: {{ values.service.targetPort }}

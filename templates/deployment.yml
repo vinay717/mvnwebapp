@@ -1,30 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mavenwebappdeployment
+  name: {{ values.deployment.name }}
 spec:
   revisionHistoryLimit: 10
-  replicas: 2
+  replicas: {{ values.deployment.replicas }}
   strategy:
-    type: Recreate
+    type: {{ values.deployment.strategy }}
   selector:
     matchLabels:
-      app: mavenwebapp
+      app: {{ values.app.name }}
   template:
     metadata:
-      name: mavenwebapppod
       labels:
-        app: mavenwebapp
+        app: {{ values.app.name }}
     spec:
       containers:
-        - name: mavenwebappcontainer
-          image: vinayomkar/mvnwebapp:latest
+        - name: {{ values.app.name }}
+          image: "{{ .values.image.repository }}:{{ values.image.tag }}"
+          pullPolicy: {{ values.image.pullPolicy }}
           ports:
-            - containerPort: 8080
-          resources:
-            requests:
-              cpu: 200m
-              memory: 256Mi
-            limits:
-              cpu: 500m
-              memory: 512Mi
+            - containerPort: {{ values.container.port }}
